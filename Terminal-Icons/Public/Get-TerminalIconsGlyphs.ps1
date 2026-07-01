@@ -20,6 +20,8 @@
     [cmdletbinding()]
     param()
 
+    Import-XmlThemes
+
     # This is also helpful for argument completers needing glyphs -
     # ArgumentCompleterAttribute isn't able to access script variables but it
     # CAN call commands.

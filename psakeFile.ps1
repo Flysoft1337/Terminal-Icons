@@ -22,6 +22,39 @@ task default -depends Test
 
 task Pester -FromModule PowerShellBuild -Version '0.6.1' -preaction {Remove-Module Terminal-Icons -ErrorAction SilentlyContinue}
 
+task CompileTheme {
+    $script:escape     = [char]27
+    $script:colorReset = "${script:escape}[0m"
+
+    . ./Terminal-Icons/Private/New-EmptyColorTheme.ps1
+    . ./Terminal-Icons/Private/ConvertFrom-RGBColor.ps1
+    . ./Terminal-Icons/Private/ConvertTo-ColorSequence.ps1
+
+    $iconThemes = @{}
+    (Get-ChildItem -Path ./Terminal-Icons/Data/iconThemes).ForEach({
+        $iconThemes.Add($_.Basename, (Import-PowerShellDataFile $_.FullName))
+    })
+    $iconThemes | Export-Clixml -Path ./Terminal-Icons/Data/iconThemes.xml
+
+    $colorThemes = @{}
+    (Get-ChildItem -Path ./Terminal-Icons/Data/colorThemes).ForEach({
+        $colorData = Import-PowerShellDataFile $_.FullName
+        $colorThemes[$colorData.Name] = $colorData
+        $colorThemes[$colorData.Name].Types.Directories[''] = $script:colorReset
+        $colorThemes[$colorData.Name].Types.Files['']       = $script:colorReset
+    })
+    $colorThemes | Export-Clixml -Path ./Terminal-Icons/Data/colorThemes.xml
+
+    $colorSequences = @{}
+    $colorThemes.GetEnumerator().ForEach({
+        $colorSequences[$_.Name] = ConvertTo-ColorSequence -ColorData $_.Value
+    })
+    $colorSequences | Export-Clixml -Path ./Terminal-Icons/Data/colorSequences.xml
+
+    $glyphs = . ./Terminal-Icons/Data/glyphs.ps1
+    $glyphs | Export-Clixml -Path ./Terminal-Icons/Data/glyphs.xml
+}
+
 task UpdateGlyphs {
     Import-Module PowerHtml
 

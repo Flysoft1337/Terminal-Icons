@@ -30,6 +30,8 @@ function Add-Theme {
     )
 
     process {
+        Import-XmlThemes
+
         # Resolve path(s)
         if ($PSCmdlet.ParameterSetName -eq 'Path') {
             $paths = Resolve-Path -Path $Path | Select-Object -ExpandProperty Path

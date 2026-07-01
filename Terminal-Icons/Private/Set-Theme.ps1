@@ -12,6 +12,8 @@ function Set-Theme {
         [string]$Type
     )
 
+    Import-XmlThemes
+
     if ([string]::IsNullOrEmpty($Name)) {
         $script:userThemeData."Current$($Type)Theme" = $null
         $script:prefs."Current$($Type)Theme" = ''

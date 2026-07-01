@@ -19,5 +19,7 @@ function Get-TerminalIconsIconTheme {
     .LINK
         Get-TerminalIconsTheme
     #>
+    Import-XmlThemes
+
     $script:userThemeData.Themes.Icon
 }

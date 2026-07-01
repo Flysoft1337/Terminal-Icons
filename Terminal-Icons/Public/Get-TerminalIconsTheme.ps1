@@ -22,6 +22,8 @@ function Get-TerminalIconsTheme {
     [CmdletBinding()]
     param()
 
+    Import-XmlThemes
+
     $iconTheme = if ($script:userThemeData.CurrentIconTheme) {
         [pscustomobject]$script:userThemeData.Themes.Icon[$script:userThemeData.CurrentIconTheme]
     } else {

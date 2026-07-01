@@ -31,6 +31,10 @@ function Format-TerminalIcons {
         [IO.FileSystemInfo]$FileInfo
     )
 
+    begin {
+        Import-XmlThemes
+    }
+
     process {
         $displayInfo = Resolve-Icon $FileInfo
         if ($displayInfo.Icon) {

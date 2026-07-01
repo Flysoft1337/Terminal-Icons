@@ -39,7 +39,7 @@ function Resolve-Icon {
                 if ($colors) {
                     $colorSeq = $colors.Types.($type)['junction']
                 } else {
-                    $colorSet = $script:colorReset
+                    $colorSeq = $script:colorReset
                 }
                 $displayInfo['Target'] = ' ' + $glyphs['nf-md-arrow_right_thick'] + ' ' + $FileInfo.Target
                 break
@@ -53,7 +53,7 @@ function Resolve-Icon {
                 if ($colors) {
                     $colorSeq = $colors.Types.($type)['symlink']
                 } else {
-                    $colorSet = $script:colorReset
+                    $colorSeq = $script:colorReset
                 }
                 $displayInfo['Target'] = ' ' + $glyphs['nf-md-arrow_right_thick'] + ' ' + $FileInfo.Target
                 break

@@ -19,5 +19,7 @@ function Get-TerminalIconsColorTheme {
     .LINK
         Get-TerminalIconsTheme
     #>
+    Import-XmlThemes
+
     $script:userThemeData.Themes.Color
 }

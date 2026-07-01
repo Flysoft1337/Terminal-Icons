@@ -11,4 +11,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Test
-      run: pwsh -f ./build.ps1 -Task Test -Bootstrap
+      run: pwsh -f ./build.ps1 -Task CompileTheme,Test -Bootstrap
